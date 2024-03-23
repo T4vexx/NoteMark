@@ -1,26 +1,26 @@
-# notes
+# NoteMark
 
-An Electron application with React and TypeScript
+Um aplicação electron com React e Typescript
 
-## Recommended IDE Setup
+## Configurações recomendadas para IDE
 
 - [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
-## Project Setup
+## Configuração do projeto
 
-### Install
+### Instalar
 
 ```bash
 $ yarn
 ```
 
-### Development
+### Desenvolver
 
 ```bash
 $ yarn dev
 ```
 
-### Build
+### Buildar
 
 ```bash
 # For windows
@@ -32,4 +32,5 @@ $ yarn build:mac
 # For Linux
 $ yarn build:linux
 ```
-# NoteMark
+
+> Créditos: Code With Gionatha
