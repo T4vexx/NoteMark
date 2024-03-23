@@ -36,6 +36,6 @@ $ yarn build:linux
 ### Imagens do APP
 
 - Tela de Boas Vindas
-![alt text](image.png)
+  ![alt text](image.png)
 
 > Créditos: Code With Gionatha

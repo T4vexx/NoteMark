@@ -1,10 +1,10 @@
-import { appDir, fileEnconding } from "../../shared/constants"
-import { NoteInfo } from "@shared/models"
-import { CreateNote, DeleteNote, GetNotes, ReadNote, WriteNote } from "@shared/types"
-import { dialog } from "electron"
-import { ensureDir, readdir, readFile, remove, stat, writeFile } from "fs-extra"
-import { homedir } from "os"
-import path from "path"
+import { appDir, fileEnconding } from '../../shared/constants'
+import { NoteInfo } from '@shared/models'
+import { CreateNote, DeleteNote, GetNotes, ReadNote, WriteNote } from '@shared/types'
+import { dialog } from 'electron'
+import { ensureDir, readdir, readFile, remove, stat, writeFile } from 'fs-extra'
+import { homedir } from 'os'
+import path from 'path'
 import { isEmpty } from 'lodash'
 import welcomeNoteFile from '../../../resources/welcomeNote.md?asset'
 
@@ -22,7 +22,7 @@ export const getNotes: GetNotes = async () => {
   })
 
   const notes = notesFilesNames.filter((fn) => fn.endsWith('.md'))
-  if(isEmpty(notes)) {
+  if (isEmpty(notes)) {
     const content = await readFile(welcomeNoteFile, { encoding: fileEnconding })
 
     await writeFile(`${rootDir}/Welcome 👋.md`, content, { encoding: fileEnconding })
@@ -38,7 +38,7 @@ export const getNoteInfoFromFilename = async (fileName: string): Promise<NoteInf
 
   return {
     title: fileName.replace(/\.md$/, ''),
-    lastEditTime: fileStats.mtimeMs,
+    lastEditTime: fileStats.mtimeMs
   }
 }
 
@@ -58,20 +58,19 @@ export const createNote: CreateNote = async () => {
   const rootDir = getRootDir()
   await ensureDir(rootDir)
 
-  
   const { filePath, canceled } = await dialog.showSaveDialog({
     title: 'Nova anotação',
     defaultPath: `${rootDir}/Untitled.md`,
     buttonLabel: 'Criar',
     properties: ['showOverwriteConfirmation'],
     showsTagField: false,
-    filters: [{name: 'Markdown', extensions: ['md']}]
+    filters: [{ name: 'Markdown', extensions: ['md'] }]
   })
 
-  if(canceled  || !filePath) return false
+  if (canceled || !filePath) return false
 
   const { name: filename, dir: parentDir } = path.parse(filePath)
-  if(parentDir !== rootDir) {
+  if (parentDir !== rootDir) {
     await dialog.showMessageBox({
       type: 'error',
       title: 'Falha na criação',
@@ -96,13 +95,13 @@ export const deleteNote: DeleteNote = async (fileName) => {
     message: `Você tem certeza que quer deletar ${fileName}?`,
     buttons: ['Deletar', 'Cancelar'],
     defaultId: 1,
-    cancelId: 1,
+    cancelId: 1
   })
 
-  if(response === 1) {
+  if (response === 1) {
     return false
   }
 
   await remove(`${rootDir}/${fileName}.md`)
   return true
-} 
+}

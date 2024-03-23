@@ -5,13 +5,13 @@ import { useNotesList } from '@renderer/hooks/useNotesList'
 import { isEmpty } from 'lodash'
 
 export type NotePreviewListProps = ComponentProps<'ul'> & {
-  onSelect?: () => void;
+  onSelect?: () => void
 }
 
-export const NotePreviewList = ({onSelect, className, ...props}: NotePreviewListProps) => {
+export const NotePreviewList = ({ onSelect, className, ...props }: NotePreviewListProps) => {
   const { notes, selectedNoteIndex, handleNoteSelect } = useNotesList({ onSelect })
 
-  if(!notes) return null
+  if (!notes) return null
 
   if (isEmpty(notes)) {
     return (
@@ -23,12 +23,12 @@ export const NotePreviewList = ({onSelect, className, ...props}: NotePreviewList
 
   return (
     <ul className={className} {...props}>
-      {notes.map((note, index)=> (
-        <NotePreview 
-          key={note.title + note.lastEditTime} 
+      {notes.map((note, index) => (
+        <NotePreview
+          key={note.title + note.lastEditTime}
           isActive={selectedNoteIndex === index}
           onClick={handleNoteSelect(index)}
-          {...note} 
+          {...note}
         />
       ))}
     </ul>
